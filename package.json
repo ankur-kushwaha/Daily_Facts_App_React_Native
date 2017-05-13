@@ -89,10 +89,6 @@
       "XMLHttpRequest",
       "FormData",
       "React$Element"
-    ],
-    "space-before-function-paren": [
-      "error",
-      "never"
     ]
   },
   "config": {

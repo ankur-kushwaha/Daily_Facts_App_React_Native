@@ -1,36 +1,50 @@
 import React from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, AppState } from 'react-native'
 import { Images } from '../Themes'
-import { Actions } from 'react-native-router-flux'
-
-// import { PushNotification } from 'react-native-push-notification';
+// import { Actions } from 'react-native-router-flux'
+import PushNotification from 'react-native-push-notification'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-// PushNotification.configure({
-//   // (required) Called when a remote or local notification is opened or received
-//   onNotification: function (notification) {
-//     alert('NOTIFICATION:', notification);
-//   },
-// })
-
-// PushNotification.localNotificationSchedule({
-//   message: "My Notification Message", // (required)
-//   date: new Date(Date.now() + (60 * 1000)) // in 60 secs
-// });
-
 class LaunchScreen extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
+  }
+  componentWillMount () {
+    AppState.addEventListener('change', this.handleAppStateChange)
+  }
+  componentWillUnmount () {
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange (AppState) {
+    console.log(AppState)
+    if (AppState === 'background') {
+      let date = new Date(Date.now() + (5 * 1000))
+      PushNotification.localNotificationSchedule({
+        message: 'test',
+        date
+      })
+    }
+  }
+
   render () {
     return (
       <View style={styles.mainContainer}>
+
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Image source={Images.launch} style={styles.logo} />
           </View>
 
-          <TouchableOpacity onPress={Actions.loginScreen}>
+          <TouchableOpacity onPress={() => {
+            PushNotification.localNotification({
+              message: 'test'
+            })
+          }}>
             <View style={styles.loginButton}>
               <Text style={styles.loginText}>Sign In</Text>
             </View>
