@@ -1,11 +1,26 @@
 import React from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from '../Themes'
+import { Actions } from 'react-native-router-flux'
+
+// import { PushNotification } from 'react-native-push-notification';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-export default class LaunchScreen extends React.Component {
+// PushNotification.configure({
+//   // (required) Called when a remote or local notification is opened or received
+//   onNotification: function (notification) {
+//     alert('NOTIFICATION:', notification);
+//   },
+// })
+
+// PushNotification.localNotificationSchedule({
+//   message: "My Notification Message", // (required)
+//   date: new Date(Date.now() + (60 * 1000)) // in 60 secs
+// });
+
+class LaunchScreen extends React.Component {
   render () {
     return (
       <View style={styles.mainContainer}>
@@ -14,6 +29,12 @@ export default class LaunchScreen extends React.Component {
           <View style={styles.centered}>
             <Image source={Images.launch} style={styles.logo} />
           </View>
+
+          <TouchableOpacity onPress={Actions.loginScreen}>
+            <View style={styles.loginButton}>
+              <Text style={styles.loginText}>Sign In</Text>
+            </View>
+          </TouchableOpacity>
 
           <View style={styles.section} >
             <Image source={Images.ready} />
@@ -27,3 +48,9 @@ export default class LaunchScreen extends React.Component {
     )
   }
 }
+
+LaunchScreen.contextTypes = {
+  drawer: React.PropTypes.object
+}
+
+export default LaunchScreen

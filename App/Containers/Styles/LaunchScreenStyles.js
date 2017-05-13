@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from '../../Themes/'
+import { Metrics, ApplicationStyles, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -14,5 +14,16 @@ export default StyleSheet.create({
   },
   centered: {
     alignItems: 'center'
+  },
+  loginButton: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: Colors.charcoal,
+    backgroundColor: Colors.panther,
+    padding: 6
+  },
+  loginText: {
+    textAlign: 'center',
+    color: Colors.silver
   }
 })
