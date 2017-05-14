@@ -12,17 +12,24 @@ export default StyleSheet.create({
     width: Metrics.images.logo,
     resizeMode: 'contain'
   },
-  centered: {
-    alignItems: 'center'
+  centeredlogo: {
+    paddingTop: 50,
+    paddingBottom: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   loginButton: {
-    flex: 1,
     borderWidth: 1,
     borderColor: Colors.charcoal,
     backgroundColor: Colors.panther,
-    padding: 6
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginHorizontal: Metrics.doubleBaseMargin,
+    marginTop: 20,
+    alignItems: 'center'
   },
   loginText: {
+    fontSize: 17,
     textAlign: 'center',
     color: Colors.silver
   }

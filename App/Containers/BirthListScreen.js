@@ -1,14 +1,18 @@
 import React from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, Text, ListView, TouchableOpacity, Linking } from 'react-native'
 import { connect } from 'react-redux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
+import create from '../Services/apiService'
 
 // Styles
 import styles from './Styles/ListviewExampleStyles'
 
-class ListviewExample extends React.Component {
+const rowHasChanged = (r1, r2) => r1 !== r2
+const ds = new ListView.DataSource({rowHasChanged})
+
+class BirthListScreen extends React.Component {
   constructor (props) {
     super(props)
     /* ***********************************************************
@@ -17,27 +21,7 @@ class ListviewExample extends React.Component {
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
     const dataObjects = [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'},
-      {title: 'Eighth Title', description: 'Eighth Description'},
-      {title: 'Ninth Title', description: 'Ninth Description'},
-      {title: 'Tenth Title', description: 'Tenth Description'},
-      {title: 'Eleventh Title', description: 'Eleventh Description'},
-      {title: '12th Title', description: '12th Description'},
-      {title: '13th Title', description: '13th Description'},
-      {title: '14th Title', description: '14th Description'},
-      {title: '15th Title', description: '15th Description'},
-      {title: '16th Title', description: '16th Description'},
-      {title: '17th Title', description: '17th Description'},
-      {title: '18th Title', description: '18th Description'},
-      {title: '19th Title', description: '19th Description'},
-      {title: '20th Title', description: '20th Description'},
-      {title: 'BLACKJACK!', description: 'BLACKJACK! Description'}
+
     ]
 
     /* ***********************************************************
@@ -46,15 +30,29 @@ class ListviewExample extends React.Component {
     * Make this function fast!  Perhaps something like:
     *   (r1, r2) => r1.id !== r2.id}
     *************************************************************/
-    const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
-    const ds = new ListView.DataSource({rowHasChanged})
 
     // Datasource is always in state
     this.state = {
       dataSource: ds.cloneWithRows(dataObjects)
     }
+  }
+
+  componentDidMount () {
+    var api = create()
+    api.fetchFacts().then((data) => {
+      var newData = data.Births.map((d) => {
+        return {
+          title: d.text,
+          year: d.year,
+          url: d.links[0].link
+        }
+      }).sort((a, b) => {
+        return Number(b.year) - Number(a.year)
+      })
+      this.setState({dataSource: ds.cloneWithRows(newData)})
+    })
   }
 
   /* ***********************************************************
@@ -67,10 +65,15 @@ class ListviewExample extends React.Component {
   *************************************************************/
   renderRow (rowData) {
     return (
-      <View style={styles.row}>
-        <Text style={styles.boldLabel}>{rowData.title}</Text>
-        <Text style={styles.label}>{rowData.description}</Text>
-      </View>
+      <TouchableOpacity onPress={() => {
+        Linking.openURL(rowData.url).catch(err => console.error('An error occurred', err))
+      }}>
+
+        <View style={styles.row}>
+          <Text style={styles.boldLabel}>{rowData.title}</Text>
+          <Text style={styles.label}>Year: {rowData.year }</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -119,4 +122,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ListviewExample)
+export default connect(mapStateToProps)(BirthListScreen)

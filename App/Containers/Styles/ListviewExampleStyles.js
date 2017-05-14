@@ -6,24 +6,28 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Metrics.navBarHeight,
-    backgroundColor: Colors.background
+    backgroundColor: 'white'
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.fire,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'gray',
     marginVertical: Metrics.smallMargin,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginHorizontal: 13,
+    padding: 15
   },
   boldLabel: {
     fontWeight: 'bold',
-    alignSelf: 'center',
-    color: Colors.snow,
-    textAlign: 'center',
+    color: Colors.text,
+    textAlign: 'left',
     marginVertical: Metrics.smallMargin
   },
   label: {
-    textAlign: 'center',
-    color: Colors.snow,
+    textAlign: 'right',
+    color: Colors.text,
     marginBottom: Metrics.smallMargin
   },
   listContent: {
