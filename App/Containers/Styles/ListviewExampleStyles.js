@@ -11,24 +11,31 @@ export default StyleSheet.create({
   row: {
     flex: 1,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'gray',
+    borderWidth: 2,
+    borderColor: Colors.cardBorder,
     marginVertical: Metrics.smallMargin,
-    justifyContent: 'center',
-    borderRadius: 5,
+    borderRadius: 1,
     marginHorizontal: 13,
-    padding: 15
+    alignItems: 'stretch',
+    flexDirection: 'row'
   },
   boldLabel: {
-    fontWeight: 'bold',
-    color: Colors.text,
+    color: Colors.textPrimary,
+    fontSize: 15,
     textAlign: 'left',
-    marginVertical: Metrics.smallMargin
+    lineHeight: 20,
+    padding: 10,
+    alignItems: 'stretch',
+    flex: 1
   },
   label: {
-    textAlign: 'right',
-    color: Colors.text,
-    marginBottom: Metrics.smallMargin
+    padding: 10,
+    backgroundColor: Colors.buttonBackground,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    color: Colors.white
   },
   listContent: {
     marginTop: Metrics.baseMargin

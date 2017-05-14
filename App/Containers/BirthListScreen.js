@@ -70,8 +70,8 @@ class BirthListScreen extends React.Component {
       }}>
 
         <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.title}</Text>
-          <Text style={styles.label}>Year: {rowData.year }</Text>
+          <View style={styles.label}><Text style={styles.text}>{rowData.year}</Text></View>
+          <Text style={styles.boldLabel}>{rowData.title }</Text>
         </View>
       </TouchableOpacity>
     )

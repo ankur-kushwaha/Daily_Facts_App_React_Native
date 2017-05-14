@@ -20,7 +20,7 @@ class NavigationRouter extends Component {
         <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene key='drawerChildrenWrapper' navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
             <Scene initial key='launchScreen' component={LaunchScreen} title='Daily Facts' />
-            <Scene key='birthListScreen' component={BirthListScreen} title='Aniversary Today' />
+            <Scene key='birthListScreen' component={BirthListScreen} title="Today's Aniversary" />
             <Scene key='eventListScreen' component={EventListScreen} title="Today's Events" />
             <Scene key='webViewScreen' component={WebViewScreen} />
           </Scene>

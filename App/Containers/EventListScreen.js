@@ -72,8 +72,8 @@ class EventListScreen extends React.Component {
       }}>
 
         <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.title}</Text>
-          <Text style={styles.label}>Year: {rowData.year}</Text>
+          <View style={styles.label}><Text style={styles.text}>{rowData.year}</Text></View>
+          <Text style={styles.boldLabel}>{rowData.title }</Text>
         </View>
       </TouchableOpacity>
     )
@@ -100,7 +100,7 @@ class EventListScreen extends React.Component {
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
   noRowData () {
-    return this.state.dataSource.length === 0
+    return this.state.dataSource.getRowCount() === 0
   }
 
   render () {

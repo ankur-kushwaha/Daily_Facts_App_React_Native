@@ -20,8 +20,8 @@ export default StyleSheet.create({
   },
   loginButton: {
     borderWidth: 1,
-    borderColor: Colors.charcoal,
-    backgroundColor: Colors.panther,
+    borderColor: Colors.buttonBackground,
+    backgroundColor: Colors.buttonBackground,
     paddingTop: 20,
     paddingBottom: 20,
     marginHorizontal: Metrics.doubleBaseMargin,
@@ -31,6 +31,6 @@ export default StyleSheet.create({
   loginText: {
     fontSize: 17,
     textAlign: 'center',
-    color: Colors.silver
+    color: Colors.buttonText
   }
 })

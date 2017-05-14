@@ -4,16 +4,24 @@ function create (baseUrl = 'http://history.muffinlabs.com') {
   function fetchFacts () {
     return AsyncStorage.getItem('@MyStore:dayHistoryData')
     .then((data) => {
-      if (data != null) {
-        return JSON.parse(data)
+      let currentDate = new Date().toJSON().slice(0, 10)
+      data = JSON.parse(data)
+      if (data != null && data.date === currentDate) {
+        return data.facts
       } else {
         console.log('--------', baseUrl + '/date')
         return fetch(baseUrl + '/date')
             .then((response) => response.json())
             .then((responseJson) => {
-              return AsyncStorage.setItem('@MyStore:dayHistoryData', JSON.stringify(responseJson.data))
+              let facts = responseJson.data
+              let date = new Date().toJSON().slice(0, 10)
+              let data = {
+                facts, date
+              }
+
+              return AsyncStorage.setItem('@MyStore:dayHistoryData', JSON.stringify(data))
                 .then(() => {
-                  return responseJson.data
+                  return facts
                 })
             })
         .catch((error) => {

@@ -7,16 +7,10 @@ import { Actions } from 'react-native-router-flux'
 import styles from './Styles/LaunchScreenStyles'
 
 class LaunchScreen extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleAppStateChange = this.handleAppStateChange.bind(this)
-  }
-
   render () {
     return (
       <View style={styles.mainContainer}>
 
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.centeredlogo}>
             <Image source={Images.launch} style={styles.logo} />
